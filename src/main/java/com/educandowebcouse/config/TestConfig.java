@@ -17,7 +17,7 @@ public class TestConfig implements CommandLineRunner {
 // CommandLineRunner executa quando o programa for iniciado
 // serve para popular o banco de dados com alguns objetos, e fazer a injeção de depêndencias no UserRepository
 
-	@Autowired
+	@Autowired // faz a injeção de dependências
 	private UserRepository userRepository;
 
 	@Override
