@@ -12,22 +12,28 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "tb_order")
 public class Order implements Serializable {
-	// Serializable transforma o arquivo em Json e é necessário colocar private static final long serialVersionUID = 1L;
+	// Serializable transforma o arquivo em Json e é necessário colocar private
+	// static final long serialVersionUID = 1L;
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // Auto Incremento
 	private Long id;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant moment;
-	
-	// ASSOCIAÇÃO COM A CLASSE USER, MUITOS PARA UM.	
+
+	// ASSOCIAÇÃO COM A CLASSE USER, MUITOS PARA UM.
+
 	@ManyToOne
 	@JoinColumn(name = "client_id") // Nome da chave estrangeira no banco
 	private User client;
-	
+
 	public Order() {
 	}
 
@@ -78,7 +84,5 @@ public class Order implements Serializable {
 		Order other = (Order) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
 
 }

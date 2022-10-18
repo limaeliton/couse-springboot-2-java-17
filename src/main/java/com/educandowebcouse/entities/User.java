@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_user")
@@ -20,8 +21,7 @@ public class User implements Serializable {
 // JPA CONVERTE OS OBJETOS EM MODELO RELACIONAL	
 // @Id informa que a chave primária do banco vai ser o Id
 	private static final long serialVersionUID = 1L;
-	
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // Auto Incremento
 	private Long id;
@@ -29,12 +29,13 @@ public class User implements Serializable {
 	private String email;
 	private String phone;
 	private String password;
-	
-	// ASSOCIAÇÃO COM A CLASSE  ORDER,uma coleção, e tem que instânciar uma coleção
+
+	// ASSOCIAÇÃO COM A CLASSE ORDER,uma coleção, e tem que instânciar uma coleção
+	@JsonIgnore
 	@OneToMany(mappedBy = "client") // é o atributo do outro lado da associação
 	private List<Order> orders = new ArrayList<>();
-	
-	public User() {		
+
+	public User() {
 	}
 
 	public User(Long id, String name, String email, String phone, String password) {
@@ -85,12 +86,11 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public List<Order> getOrders() {
 		return orders;
 	}
-	
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -108,6 +108,4 @@ public class User implements Serializable {
 		return Objects.equals(id, other.id);
 	}
 
-
-	
 }
