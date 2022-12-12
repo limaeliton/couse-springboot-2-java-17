@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "tb_user")
 public class User implements Serializable {
 // Serializable transforma o arquivo em Json e é necessário colocar private static final long serialVersionUID = 1L;
-// JPA CONVERTE OS OBJETOS EM MODELO RELACIONAL	
+// JPA CONVERTE OS OBJETOS EM MODELO RELACIONAL	= @Entity
 // @Id informa que a chave primária do banco vai ser o Id
 	private static final long serialVersionUID = 1L;
 
@@ -31,6 +31,7 @@ public class User implements Serializable {
 	private String password;
 
 	// ASSOCIAÇÃO COM A CLASSE ORDER,uma coleção, e tem que instânciar uma coleção
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "client") // é o atributo do outro lado da associação
 	private List<Order> orders = new ArrayList<>();
@@ -86,6 +87,7 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
 
 	public List<Order> getOrders() {
 		return orders;
