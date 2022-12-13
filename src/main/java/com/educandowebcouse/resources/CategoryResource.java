@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.educandowebcouse.entities.Category;
+import com.educandowebcouse.entities.User;
 import com.educandowebcouse.services.CategoryService;
 
 @RestController
@@ -22,17 +23,17 @@ public class CategoryResource {
 	
 // retorna respostas de requisição WEB
 	@GetMapping 
-	public ResponseEntity<List <Category>> findAll(){
+	public ResponseEntity<List<User>> findAll(){
 		
-		List<Category> list = service.findAll();
+		List<User> list = service.findAll();
 		
 		return ResponseEntity.ok().body(list);
 	}
 	
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Category>findById(@PathVariable Long id) {
-		Category obj = service.findById(id);
+	public ResponseEntity<User> findById(@PathVariable Long id) {
+		User obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
 }
