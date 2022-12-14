@@ -33,7 +33,7 @@ public Order getOrder() {
 public void setOrder(Order order) {
 	this.order = order;
 }
-@JsonIgnore
+
 public Product getProduct() {
 	return product;
 }

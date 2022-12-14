@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.educandowebcouse.entities.Category;
 import com.educandowebcouse.entities.Order;
 import com.educandowebcouse.entities.OrderItem;
+import com.educandowebcouse.entities.Payment;
 import com.educandowebcouse.entities.Product;
 import com.educandowebcouse.entities.User;
 import com.educandowebcouse.entities.enums.OrderStatus;
@@ -91,7 +92,11 @@ public class TestConfig implements CommandLineRunner {
 		
 		 orderItemRepository.saveAll(Arrays.asList(oi1, oi2 ,oi3 ,oi4 ));
 		
+		Payment pay1 = new Payment((Long) null, Instant.parse("2022-06-20T21:53:07Z"), o1);
+		// só quando for relacionamento de 1 x 1
+		o1.setPayment(pay1);
 		
+		orderRepository.save(o1);
 
 	}
 
