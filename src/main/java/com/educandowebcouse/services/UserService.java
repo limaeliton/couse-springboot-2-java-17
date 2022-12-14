@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.educandowebcouse.entities.User;
 import com.educandowebcouse.repositories.UserRepository;
+import com.educandowebcouse.services.exceptions.ResourceNotFoundException;
 
  @Service   // classe de serviço do Spring é um componente
 public class UserService {
@@ -20,9 +21,10 @@ public class UserService {
 	}
 	
 	// Optional<User> retorna um objeto
+	// tenta dar o get se não tiver usuário lança exceção |orElseThrow(() -> new ResourceNotFoundException(id))
 	public User findById(Long id) {
 		Optional<User> obj = repository.findById(id);
-		return obj.get(); // retorna o objeto
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));// retorna o objeto
 	}
 	
 	
